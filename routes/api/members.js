@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const uuid = require("uuid");
-const members = [
+let members = [
   { id: 1, name: "John Doe", email: "john@gmail.com", status: "active" },
   { id: 2, name: "Lwa7ch Lkbir", email: "beast@gmail.com", status: "inactive" },
   { id: 3, name: "Saad Lmjared", email: "7bibis@gmail.com", status: "active" },
@@ -17,10 +17,10 @@ router.get("/", (req, res) => {
 //2-get single member
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const found = members.some((member) => member.id === id);
+  const found = members.find((member) => member.id === id);
 
   if (found) {
-    res.json(members.filter((member) => member.id === id));
+    res.json(found);
   } else {
     res.status(400).json({ msg: `No member with the id of : ${id}` });
   }
@@ -63,6 +63,22 @@ router.put("/:id", (req, res) => {
         }
         res.send({ msg: "Member successfully updated ", member });
       }
+    });
+  } else {
+    res.status(400).json({ msg: `No member with the id of : ${id}` });
+  }
+});
+
+//5-delete member
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const found = members.find((member) => member.id === id);
+
+  if (found) {
+    members = members.filter((member) => member.id !== id);
+    res.json({
+      msg: "Member succesfully deleted",
+      members: members.filter((member) => member.id !== id),
     });
   } else {
     res.status(400).json({ msg: `No member with the id of : ${id}` });
