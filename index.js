@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false })); //to handle forme submissions
 
 //Member API Routes
 app.use("/api/members", require("./routes/api/members"));
+app.use("/api/blogs", require("./routes/api/blogs"));
 
 //set public folder as public static folder GOOD PRACTICE BACH MACHI A CHAQUE FOIS NDIRO ROUTE SPECIAL L FILE
 app.use(express.static(path.join(__dirname, "/public")));
