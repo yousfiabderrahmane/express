@@ -8,7 +8,11 @@ const app = express();
 //init middleware
 // app.use(logger);
 
-//to use the router :
+//Body Parser middleware
+app.use(express.json()); //to handle raw json
+app.use(express.urlencoded({ extended: false })); //to handle forme submissions
+
+//Member API Routes
 app.use("/api/members", require("./routes/api/members"));
 
 //set public folder as public static folder GOOD PRACTICE BACH MACHI A CHAQUE FOIS NDIRO ROUTE SPECIAL L FILE
